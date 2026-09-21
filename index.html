@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>K's Crafts | Business Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="profile">
+
+            <img
+                src="image/a.png"
+                alt="Profile Picture"
+                class="profile-img"
+            >
+
+            <h2>K's Crafts</h2>
+            <p>Business Owner</p>
+
+        </div>
+
+        <nav class="navigation">
+
+            <a href="#dashboard">Dashboard</a>
+
+            <a href="#sales">Sales</a>
+
+            <a href="#expenses">Expenses</a>
+
+            <a href="#customers">Customers</a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- DASHBOARD -->
+        <section id="dashboard">
+
+            <div class="welcome">
+
+                <h1>Welcome to K's Crafts</h1>
+
+                <p>
+                    Manage your sales, expenses, customers and business profit.
+                </p>
+
+            </div>
+
+
+            <!-- SUMMARY CARDS -->
+            <div class="summary">
+
+                <div class="card sales-card">
+
+                    <span>Total Sales</span>
+
+                    <h2 id="totalSales">₱0.00</h2>
+
+                    <p>Money Earned</p>
+
+                </div>
+
+
+                <div class="card expense-card">
+
+                    <span>Total Expenses</span>
+
+                    <h2 id="totalExpenses">₱0.00</h2>
+
+                    <p>Money Spent</p>
+
+                </div>
+
+
+                <div class="card profit-card">
+
+                    <span>Net Profit</span>
+
+                    <h2 id="totalProfit">₱0.00</h2>
+
+                    <p>Sales - Expenses</p>
+
+                </div>
+
+
+                <div class="card customer-card">
+
+                    <span>Customers</span>
+
+                    <h2 id="totalCustomers">0</h2>
+
+                    <p>Total Customers</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SALES -->
+        <section id="sales">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Sales</h2>
+
+                    <p>Record and monitor your sales.</p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn"
+                    onclick="openSaleModal()"
+                >
+                    + Record Sale
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="salesList">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXPENSES -->
+        <section id="expenses">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Expenses</h2>
+
+                    <p>Track your business expenses.</p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn"
+                    onclick="openExpenseModal()"
+                >
+                    + Add Expense
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Expense</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="expenseList">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- CUSTOMERS -->
+        <section id="customers">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Customers</h2>
+
+                    <p>Manage your customers.</p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn"
+                    onclick="openCustomerModal()"
+                >
+                    + Add Customer
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Orders</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="customerList">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            © 2026 K's Crafts | Sales & Expense Management
+
+        </footer>
+
+    </main>
+
+
+
+    <!-- ========================= -->
+    <!-- SALE MODAL -->
+    <!-- ========================= -->
+
+    <div id="saleModal" class="modal">
+
+        <div class="modal-content">
+
+            <button
+                type="button"
+                class="close"
+                onclick="closeSaleModal()"
+            >
+                &times;
+            </button>
+
+            <h2>Record Sale</h2>
+
+            <form id="saleForm">
+
+                <label for="saleCustomer">
+                    Customer
+                </label>
+
+                <select id="saleCustomer" required>
+
+                    <option value="">
+                        Select Customer
+                    </option>
+
+                </select>
+
+
+                <label for="saleItem">
+                    Item / Product
+                </label>
+
+                <input
+                    type="text"
+                    id="saleItem"
+                    placeholder="Example: Bouquet"
+                    required
+                >
+
+
+                <label for="salePrice">
+                    Price
+                </label>
+
+                <input
+                    type="number"
+                    id="salePrice"
+                    placeholder="0.00"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+
+
+                <label for="saleQuantity">
+                    Quantity
+                </label>
+
+                <input
+                    type="number"
+                    id="saleQuantity"
+                    value="1"
+                    min="1"
+                    required
+                >
+
+
+                <div class="sale-preview">
+
+                    Total:
+                    <strong id="saleTotalPreview">
+                        ₱0.00
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn full-btn"
+                >
+                    Complete Sale
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================= -->
+    <!-- EXPENSE MODAL -->
+    <!-- ========================= -->
+
+    <div id="expenseModal" class="modal">
+
+        <div class="modal-content">
+
+            <button
+                type="button"
+                class="close"
+                onclick="closeExpenseModal()"
+            >
+                &times;
+            </button>
+
+            <h2>Add Expense</h2>
+
+            <form id="expenseForm">
+
+                <label for="expenseName">
+                    Expense Name
+                </label>
+
+                <input
+                    type="text"
+                    id="expenseName"
+                    placeholder="Example: Materials"
+                    required
+                >
+
+
+                <label for="expenseDescription">
+                    Description
+                </label>
+
+                <input
+                    type="text"
+                    id="expenseDescription"
+                    placeholder="Example: Ribbon and wrapping"
+                >
+
+
+                <label for="expenseAmount">
+                    Amount
+                </label>
+
+                <input
+                    type="number"
+                    id="expenseAmount"
+                    placeholder="0.00"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="btn full-btn"
+                >
+                    Save Expense
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================= -->
+    <!-- CUSTOMER MODAL -->
+    <!-- ========================= -->
+
+    <div id="customerModal" class="modal">
+
+        <div class="modal-content">
+
+            <button
+                type="button"
+                class="close"
+                onclick="closeCustomerModal()"
+            >
+                &times;
+            </button>
+
+            <h2>Add Customer</h2>
+
+            <form id="customerForm">
+
+                <label for="customerName">
+                    Customer Name
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Example: Juan Dela Cruz"
+                    required
+                >
+
+
+                <label for="customerContact">
+                    Contact Number
+                </label>
+
+                <input
+                    type="text"
+                    id="customerContact"
+                    placeholder="Example: 09123456789"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="btn full-btn"
+                >
+                    Save Customer
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+</html>
